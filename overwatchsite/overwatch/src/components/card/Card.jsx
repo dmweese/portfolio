@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { useState } from 'react'
 import './card.css'
 import bg from '../../assets/pics/bg.jpg'
@@ -33,17 +33,30 @@ import widow from '../../assets/pics/widow.jpg'
 import winston from '../../assets/pics/winston.jpg'
 import zarya from '../../assets/pics/zarya.jpg'
 import zenyatta from '../../assets/pics/zenyatta.jpg'
-import soldier from '../../assets/pics/76.jpg'
+import soldier from '../../assets/pics/76.jpg';
+import {CardContext} from '../CardContext'
 
 const Card = (props) => {
 
-  function sayHello() {
-    alert('h');
+  const {selectedCard,setSelectedCard} = useContext(CardContext);
+
+  function sayHello(props,e) {
+    if(selectedCard.length <2 ){
+
+      setSelectedCard(e=>[...e,props]);
+      console.log(e)
+
+    }
   }
 
-  const [ selectedCard , setSelectedCard ] = useState();
+
+
+
+
+
+  // const [ selectedCard , setSelectedCard ] = useState();
   
-  const selectCard = () => {alert('')};
+  const selectCard = (e) => {};
 
   var photo;
 
@@ -113,7 +126,7 @@ const Card = (props) => {
     photo = soldier;
   }
   return (
-    <div className={props.cardSize ? "little-card" : "big-card"} onClick={sayHello}>
+    <div className={props.cardSize ? "little-card" : "big-card"} onClick={(e)=>sayHello(props,e)}>
       <img src={photo} alt={props.hero} />
     </div>
   )

@@ -1,11 +1,31 @@
 import React from 'react'
 import Card from '../card/Card.jsx'
 import './bottomhero.css'
-import { useState } from 'react'
+import { useState,useContext,useEffect } from 'react'
+import{CardContext }from '../CardContext'
 
 const Bottomhero = (props) => {
+
+    const {selectedCard} = useContext(CardContext);
+
+    useEffect(()=>{
+        console.log(selectedCard)
+    },[selectedCard])
+
   return (
     <div>
+         <div>
+            <p>Them</p>
+            <div className='row'>
+    {
+        
+        selectedCard.map((card,index)=>( <Card key={index} cardSize={card.cardSize} hero={card.hero} />))
+    }
+            </div>
+            </div>
+
+       
+        
         <p>Select a hero</p>
         <div className="row">
             <div className="row">
@@ -50,6 +70,7 @@ const Bottomhero = (props) => {
                 <Card cardSize={'little-card'} hero={'Zenyatta'}/>
             </div>
         </div>
+        
     </div>
   )
 }
